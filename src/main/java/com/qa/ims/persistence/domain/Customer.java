@@ -3,18 +3,18 @@ package com.qa.ims.persistence.domain;
 public class Customer {
 
 	private Long id;
-	private String firstName;
-	private String surname;
+	private String name;
+	//private String surname;
 
-	public Customer(String firstName, String surname) {
-		this.firstName = firstName;
-		this.surname = surname;
+	public Customer(String name) {
+		this.name = name;
+		//this.surname = surname;
 	}
 
-	public Customer(Long id, String firstName, String surname) {
+	public Customer(Long id, String name) {
 		this.id = id;
-		this.firstName = firstName;
-		this.surname = surname;
+		this.name = name;
+		//this.surname = surname;
 	}
 
 	public Long getId() {
@@ -25,25 +25,20 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
+		return "id:" + id + " name:" + name;
 	}
 
 	@Override
@@ -55,21 +50,21 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!firstName.equals(other.firstName))
+		} else if (!name.equals(other.name))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
-			return false;
+//		if (surname == null) {
+//			if (other.surname != null)
+//				return false;
+//		} else if (!surname.equals(other.surname))
+//			return false;
 		return true;
 	}
 
