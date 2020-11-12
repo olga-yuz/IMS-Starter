@@ -135,7 +135,7 @@ public class OrderDAO implements Dao<Order>
 					 "' where order_id =" + order.getId());
 			statement.executeUpdate("update orders_items set fk_order_id ='" + order.getId()+ 
 					"', fk_item_id ='" + order.getItem().getId() + "', quantity ='" + order.getQuantity() +
-					 "' where orders_items_id =" + order.getId());
+					 "' where fk_order_id =" + order.getId());
 			return readOrder(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
