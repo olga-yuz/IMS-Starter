@@ -24,10 +24,12 @@ public class OrderController implements CrudController<Order>
 	private Utils utils;
 	private ItemDAO itemDAO;
 	private CustomerDAO customerDAO;
-	public OrderController(OrderDAO orderDAO, Utils utils) 
+	public OrderController(OrderDAO orderDAO, ItemDAO itemDAO, CustomerDAO customerDAO, Utils utils) 
 	{
 		super();
 		this.orderDAO = orderDAO;
+		this.itemDAO = itemDAO;
+		this.customerDAO = customerDAO;
 		this.utils = utils;
 	}
 	
@@ -44,6 +46,8 @@ public class OrderController implements CrudController<Order>
 	@Override
 	public Order create() 
 	{
+//		ItemDAO itemDAO = new ItemDAO();
+//		CustomerDAO customerDAO = new CustomerDAO();
 		LOGGER.info("Please enter a customer ID");
 		Long cust_id = utils.getLong();
 		LOGGER.info("Please enter an item ID");

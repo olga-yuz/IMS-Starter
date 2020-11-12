@@ -83,7 +83,7 @@ public class OrderDAO implements Dao<Order>
 			statement.executeUpdate("INSERT INTO orders (fk_cust_id) values('" + order.getCustomer().getId()
 					+  "');" + "INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
 			+ "','" + order.getItem().getId() + "','" + order.getQuantity()
-					+  "')");
+					+  "');");
 //			statement.executeUpdate("INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
 //			+ "','" + order.getItem().getId() + "','" + order.getQuantity()
 //					+  "')");
