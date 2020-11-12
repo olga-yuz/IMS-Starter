@@ -48,7 +48,8 @@ public class OrderDAO implements Dao<Order>
 						+ "orders_items.quantity from orders_items " + 
 						"join orders on orders_items.fk_order_id = orders.order_id " + 
 						"join customers on customers.cust_id = orders.fk_cust_id " + 
-						"join items on items.item_id = orders_items.fk_item_id;");) 
+						"join items on items.item_id = orders_items.fk_item_id "
+						+ "order by orders.order_id;");) 
 		{
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {

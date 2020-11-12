@@ -69,16 +69,38 @@ public class OrderController implements CrudController<Order>
 	{
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = utils.getLong();
-		LOGGER.info("Please enter a customer ID");
-		Long cust_id = utils.getLong();
-		LOGGER.info("Please enter an item ID");
-		Long item_id = utils.getLong();
-		LOGGER.info("Please enter a quantity");
-		Long quantity = utils.getLong();
-		int quant = Math.toIntExact(quantity);
-		Order order = orderDAO.update(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
-		LOGGER.info("Order Updated");
-		return order;
+		LOGGER.info("Would you like to add an item? (Y/N)");
+		String ans = utils.getString();
+		if(ans.toLowerCase().equals("y"))
+		{
+			LOGGER.info("Please enter an item ID");
+			Long item_id = utils.getLong();
+			LOGGER.info("Please enter a customer ID");
+			Long cust_id = utils.getLong();
+			LOGGER.info("Please enter a quantity");
+			Long quantity = utils.getLong();
+			int quant = Math.toIntExact(quantity);
+			Order order = orderDAO.create(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
+			LOGGER.info("Order Updated");
+			return order;
+		}
+		else
+		{
+			LOGGER.info("Please enter a customer ID");
+			Long cust_id = utils.getLong();
+			LOGGER.info("Please enter an item ID");
+			Long item_id = utils.getLong();
+			LOGGER.info("Please enter a quantity");
+			Long quantity = utils.getLong();
+			int quant = Math.toIntExact(quantity);
+			Order order = orderDAO.update(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
+			LOGGER.info("Order Updated");
+			return order;
+		}
+		
+		
+		//LOGGER.info("Order Updated");
+		//return order;
 	}
 	@Override
 	public int delete() 

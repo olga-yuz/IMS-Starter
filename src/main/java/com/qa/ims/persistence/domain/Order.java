@@ -15,6 +15,14 @@ public class Order
 		this.customer = customer;
 		this.quantity = quantity;
 	}
+	
+	public Order(Long id, Item item, int quantity) 
+	{
+		this.id = id;
+		this.item = item;
+		this.quantity = quantity;
+	}
+
 	public Order(Long id, Item item, Customer customer) 
 	{
 		this.id = id;
