@@ -31,6 +31,18 @@ public class Order
 		this.id = id;		
 	}
 	
+	public Order(Item item, Customer customer, int quantity) 
+	{
+		this.item = item;
+		this.customer = customer;
+		this.quantity = quantity;
+	}
+	public Order(Item item, Customer customer) 
+	{
+		this.item = item;
+		this.customer = customer;
+		//this.quantity = quantity;
+	}
 	// getters & setters
 	public Long getId() 
 	{

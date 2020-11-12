@@ -6,11 +6,14 @@ public class Item
 	private String name;
 	private Double price;
 	
+	
 	// constructors
+	
 	public Item(String name) 
 	{
 		this.name = name;
 	}
+	
 
 	public Item(Long id, String name) 
 	{
