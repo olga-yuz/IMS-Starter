@@ -28,6 +28,14 @@ public class OrderDAO implements Dao<Order>
 		int quantity = resultSet.getInt("quantity");
 		return new Order(id, item, customer, quantity);
 	}
+	public Order modelFromResultSetId(ResultSet resultSet) throws SQLException 
+	{
+		Long id = resultSet.getLong("order_id");
+//		Item item = new Item(resultSet.getLong("item_id"), resultSet.getString("item_name"), resultSet.getDouble("price"));
+//		Customer customer = new Customer(resultSet.getLong("cust_id"), resultSet.getString("cust_name"));
+//		int quantity = resultSet.getInt("quantity");
+		return new Order(id);
+	}
 	
 	@Override
 	public List<Order> readAll() 
@@ -81,12 +89,17 @@ public class OrderDAO implements Dao<Order>
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("INSERT INTO orders (fk_cust_id) values('" + order.getCustomer().getId()
-					+  "');" + "INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
+					+  "')");// + "INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
+			//+ "','" + order.getItem().getId() + "','" + order.getQuantity()
+			//		+  "');");
+			
+			//NOT A GOOD LINE, RETURNS ALL IDs FOR SELECTED CUSTOMER
+			ResultSet resultSet = statement.executeQuery("SELECT order_id FROM orders WHERE fk_cust_id = " + order.getCustomer().getId());
+			resultSet.next();
+			order.setId(modelFromResultSetId(resultSet).getId());
+			statement.executeUpdate("INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
 			+ "','" + order.getItem().getId() + "','" + order.getQuantity()
-					+  "');");
-//			statement.executeUpdate("INSERT INTO orders_items (fk_order_id, fk_item_id, quantity) values('" + order.getId()
-//			+ "','" + order.getItem().getId() + "','" + order.getQuantity()
-//					+  "')");
+					+  "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -103,7 +116,7 @@ public class OrderDAO implements Dao<Order>
 						+ "join orders on orders_items.fk_order_id = orders.order_id "
 						+ "join customers on customers.cust_id = orders.fk_cust_id "
 						+ "join items on items.item_id = orders_items.fk_item_id "
-						+ "FROM orders_items where orders.order_id = " + id);) {
+						+ "where orders.order_id = " + id);) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -136,7 +149,8 @@ public class OrderDAO implements Dao<Order>
 	{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from orders_items where orders_items_id = " + id);
+			statement.executeUpdate("delete orders_items from orders_items join orders on orders_items.fk_order_id = orders.order_id"
+					+ " where orders_items_id = " + id);
 			return statement.executeUpdate("delete from orders where order_id = " + id);
 		} catch (Exception e) {
 			LOGGER.debug(e);

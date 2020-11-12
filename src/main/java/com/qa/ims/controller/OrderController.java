@@ -57,7 +57,7 @@ public class OrderController implements CrudController<Order>
 		int quant = Math.toIntExact(quantity);
 		//LOGGER.info(quant);
 		Item item = itemDAO.readItem(item_id);
-		LOGGER.info("item found");
+		//LOGGER.info("item found");
 		Customer customer = customerDAO.readCustomer(cust_id);
 		Order order = orderDAO.create(new Order(item, customer, quant));
 		LOGGER.info("Order created");
@@ -77,7 +77,7 @@ public class OrderController implements CrudController<Order>
 		Long quantity = utils.getLong();
 		int quant = Math.toIntExact(quantity);
 		Order order = orderDAO.update(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
-		LOGGER.info("Customer Updated");
+		LOGGER.info("Order Updated");
 		return order;
 	}
 	@Override
