@@ -127,6 +127,7 @@ public class OrderDAO implements Dao<Order>
 		return null;
 	}
 	
+	
 	@Override
 	public Order update(Order order) 
 	{
@@ -136,7 +137,7 @@ public class OrderDAO implements Dao<Order>
 					 "' where order_id =" + order.getId());
 			statement.executeUpdate("update orders_items set fk_order_id ='" + order.getId()+ 
 					"', fk_item_id ='" + order.getItem().getId() + "', quantity ='" + order.getQuantity() +
-					 "' where fk_order_id =" + order.getId());
+					 "' where fk_item_id =" + order.getItem().getId()+ " and fk_order_id = " +order.getId());
 			return readOrder(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -151,7 +152,7 @@ public class OrderDAO implements Dao<Order>
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete orders_items from orders_items join orders on orders_items.fk_order_id = orders.order_id"
-					+ " where orders_items_id = " + id);
+					+ " where fk_order_id = " + id);
 			return statement.executeUpdate("delete from orders where order_id = " + id);
 		} catch (Exception e) {
 			LOGGER.debug(e);
