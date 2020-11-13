@@ -145,6 +145,22 @@ public class OrderDAO implements Dao<Order>
 		}
 		return null;
 	}
+	public Order deleteItem(long item_id, long order_id)
+	{
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete orders_items from orders_items join orders on orders_items.fk_order_id = orders.order_id"
+					+ " where fk_item_id = " + item_id);
+			//return statement.executeUpdate("delete from orders where order_id = " + id);
+			return readOrder(order_id);
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+		
+	
 	
 	@Override
 	public int delete(long id) 

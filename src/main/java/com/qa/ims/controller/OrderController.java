@@ -85,17 +85,29 @@ public class OrderController implements CrudController<Order>
 			return order;
 		}
 		else
-		{
-			LOGGER.info("Please enter a customer ID");
-			Long cust_id = utils.getLong();
-			LOGGER.info("Please enter an item ID");
-			Long item_id = utils.getLong();
-			LOGGER.info("Please enter a quantity");
-			Long quantity = utils.getLong();
-			int quant = Math.toIntExact(quantity);
-			Order order = orderDAO.update(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
-			LOGGER.info("Order Updated");
-			return order;
+		{			
+			LOGGER.info("Would you like to remove an item? (Y/N)");
+			String ans2 = utils.getString();
+			if(ans2.toLowerCase().equals("y"))
+			{			
+				LOGGER.info("Please enter an item ID");
+				Long item_id = utils.getLong();
+				Order order = orderDAO.deleteItem(item_id,id);
+				return order;
+			}
+			else
+			{
+				LOGGER.info("Please enter a customer ID");
+				Long cust_id = utils.getLong();
+				LOGGER.info("Please enter an item ID");
+				Long item_id = utils.getLong();
+				LOGGER.info("Please enter a quantity");
+				Long quantity = utils.getLong();
+				int quant = Math.toIntExact(quantity);
+				Order order = orderDAO.update(new Order(id, itemDAO.readItem(item_id), customerDAO.readCustomer(cust_id), quant));
+				LOGGER.info("Order Updated");
+				return order;
+			}
 		}
 		
 		
