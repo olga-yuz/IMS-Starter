@@ -37,8 +37,18 @@ public class OrderController implements CrudController<Order>
 	public List<Order> readAll() 
 	{
 		List<Order> orders = orderDAO.readAll();
-		for (Order order : orders) {
+		for (Order order : orders) 
+		{
 			LOGGER.info(order.toString());
+		}
+		LOGGER.info("Would you like to view the cost of an order? (Y/N)");
+		String ans = utils.getString();
+		if(ans.toLowerCase().equals("y"))
+		{
+			LOGGER.info("Enter order ID: ");
+			Long order_id = utils.getLong();
+			double cost = orderDAO.calcCost(order_id);
+			LOGGER.info("Total cost of order "+ order_id+ ": "+ cost);
 		}
 		return orders;
 	}

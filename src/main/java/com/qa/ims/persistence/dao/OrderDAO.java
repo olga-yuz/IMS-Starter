@@ -176,4 +176,20 @@ public class OrderDAO implements Dao<Order>
 		}
 		return 0;
 	}
+	
+	public double calcCost(long id)
+	{
+		//Order order1 = readOrder(id);
+		List<Order> orders = readAll();
+		double cost = 0;
+		for (Order order : orders) 
+		{
+			if(order.getId()==id)
+			{
+				cost = cost+order.getItem().getPrice()*order.getQuantity();
+			}
+		}
+		
+		return cost;
+	}
 }
