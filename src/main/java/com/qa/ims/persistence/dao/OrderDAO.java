@@ -150,7 +150,7 @@ public class OrderDAO implements Dao<Order>
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete orders_items from orders_items join orders on orders_items.fk_order_id = orders.order_id"
-					+ " where fk_item_id = " + item_id);
+					+ " where fk_item_id = " + item_id + " and fk_order_id = " + order_id);
 			//return statement.executeUpdate("delete from orders where order_id = " + id);
 			return readOrder(order_id);
 		} catch (Exception e) {
