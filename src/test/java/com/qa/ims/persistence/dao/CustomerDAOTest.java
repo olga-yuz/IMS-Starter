@@ -33,14 +33,14 @@ public class CustomerDAOTest
 	@Test
 	public void testCreate() 
 	{
-		final Customer created = new Customer(2L, "chris perrins");
+		final Customer created = new Customer(3L, "Data");
 		assertEquals(created, DAO.create(created));
 	}
 	
 	@Test
 	public void testCreateFail() 
 	{
-		final Customer created = new Customer(2L, "chris per';rins");
+		final Customer created = new Customer(2L, "Wo';rf");
 		assertNull(DAO.create(created));
 	}
 
@@ -48,7 +48,8 @@ public class CustomerDAOTest
 	public void testReadAll() 
 	{
 		List<Customer> expected = new ArrayList<>();
-		expected.add(new Customer(1L, "jordan harrison"));
+		expected.add(new Customer(1L, "Jean-Luc Picard"));
+		expected.add(new Customer(2L, "Worf"));
 		assertEquals(expected, DAO.readAll());
 	}
 	
@@ -63,7 +64,7 @@ public class CustomerDAOTest
 	@Test
 	public void testReadLatest() 
 	{
-		assertEquals(new Customer(1L, "jordan harrison"), DAO.readLatest());
+		assertEquals(new Customer(2L, "Worf"), DAO.readLatest());
 	}
 //	@Test
 //	public void testReadLatestFail() 
@@ -75,7 +76,7 @@ public class CustomerDAOTest
 	public void testRead() 
 	{
 		final long ID = 1L;
-		assertEquals(new Customer(ID, "jordan harrison"), DAO.readCustomer(ID));
+		assertEquals(new Customer(ID, "Jean-Luc Picard"), DAO.readCustomer(ID));
 	}
 	
 	@Test
@@ -88,7 +89,7 @@ public class CustomerDAOTest
 	@Test
 	public void testUpdate() 
 	{
-		final Customer updated = new Customer(1L, "chris perrins");
+		final Customer updated = new Customer(1L, "Worf");
 		assertEquals(updated, DAO.update(updated));
 
 	}
@@ -96,7 +97,7 @@ public class CustomerDAOTest
 	@Test
 	public void testUpdateFail() 
 	{
-		final Customer updated = new Customer(1L, "chris per';rins");
+		final Customer updated = new Customer(1L, "Wo';rf");
 		assertNull(DAO.update(updated));
 
 	}
@@ -104,6 +105,6 @@ public class CustomerDAOTest
 	@Test
 	public void testDelete() 
 	{
-		assertEquals(1, DAO.delete(1));
+		assertEquals(1, DAO.delete(2L));
 	}
 }

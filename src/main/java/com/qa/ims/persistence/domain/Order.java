@@ -91,6 +91,9 @@ public class Order
 	{
 		return "id: " + id + " item: " + item.getName() + " quantity: " + quantity + " customer: "+ customer.getName();
 	}
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,25 +103,22 @@ public class Order
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (item == null) {
-			if (other.item != null)
+		if (customer == null) {
+			if (other.customer != null)
 				return false;
-		} else if (!item.equals(other.item))
+		} else if (!customer.equals(other.customer))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (customer == null) {
-			if (other.customer != null)
+		if (item == null) {
+			if (other.item != null)
 				return false;
-		} else if (!customer.equals(other.customer))
+		} else if (!item.equals(other.item))
 			return false;
-		if (quantity == 0) {
-			if (other.quantity != 0)
-				return false;
-		} else if (quantity != other.quantity)
+		if (quantity != other.quantity)
 			return false;
 		return true;
 	}

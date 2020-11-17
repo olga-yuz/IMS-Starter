@@ -33,14 +33,14 @@ public class ItemDAOTest
 	@Test
 	public void testCreate() 
 	{
-		final Item created = new Item(2L, "coffee", 4.99);
+		final Item created = new Item(3L, "Romulan Ale", 6.99);
 		assertEquals(created, DAO.create(created));
 	}
 	
 	@Test
 	public void testCreateFail() 
 	{
-		final Item created = new Item(2L, "coff';ee");
+		final Item created = new Item(2L, "Prune';Juice");
 		assertNull(DAO.create(created));
 	}
 	
@@ -48,21 +48,22 @@ public class ItemDAOTest
 	public void testReadAll() 
 	{
 		List<Item> expected = new ArrayList<>();
-		expected.add(new Item(1L, "tea", 3.50));
+		expected.add(new Item(1L, "Tea, Earl Grey, Hot", 3.50));
+		expected.add(new Item(2L, "Prune Juice", 4.99));
 		assertEquals(expected, DAO.readAll());
 	}
 	
 	@Test
 	public void testReadLatest() 
 	{
-		assertEquals(new Item(1L, "tea", 3.50), DAO.readLatest());
+		assertEquals(new Item(2L, "Prune Juice", 4.99), DAO.readLatest());
 	}
 	
 	@Test
 	public void testRead() 
 	{
 		final long ID = 1L;
-		assertEquals(new Item(ID, "tea", 3.50), DAO.readItem(ID));
+		assertEquals(new Item(ID, "Tea, Earl Grey, Hot", 3.50), DAO.readItem(ID));
 	}
 	
 	@Test
@@ -75,7 +76,7 @@ public class ItemDAOTest
 	@Test
 	public void testUpdate() 
 	{
-		final Item updated = new Item(1L, "coffee", 4.99);
+		final Item updated = new Item(1L, "Prune Juice", 4.99);
 		assertEquals(updated, DAO.update(updated));
 
 	}
@@ -83,7 +84,7 @@ public class ItemDAOTest
 	@Test
 	public void testUpdateFail() 
 	{
-		final Item updated = new Item(1L, "coff';ee");
+		final Item updated = new Item(1L, "Prune';Juice");
 		assertNull(DAO.update(updated));
 
 	}
@@ -91,6 +92,6 @@ public class ItemDAOTest
 	@Test
 	public void testDelete() 
 	{
-		assertEquals(1, DAO.delete(1));
+		assertEquals(1, DAO.delete(2L));
 	}
 }
