@@ -9,17 +9,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Need to install Java jdk1.8.0_271, which you can get from [Oracle Java](https://www.oracle.com/uk/java/technologies/javase/javase-jdk8-downloads.html)
+Install Java jdk1.8.0_271, which you can get from [Oracle Java](https://www.oracle.com/uk/java/technologies/javase/javase-jdk8-downloads.html)
 
-Need to install Maven 3.6.3 for project dependencies from [Apache Maven](http://maven.apache.org/)
+Install Maven 3.6.3 for project dependencies from [Apache Maven](http://maven.apache.org/)
 
-```
-Give examples
-```
+Install MySQL Workbench [MySQL](https://dev.mysql.com/downloads/mysql/5.7.html)
+
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
 
 Add a JAVA_HOME Environment System variable and add it to PATH variable
 
@@ -43,34 +40,25 @@ mvn clean package
 ```
 A .jar with dependencies should appear in \target
 
-End with an example of getting some data out of the system or using it for a little demo
+You may like to install Eclipse 2020-06 for Java [Eclipse](https://www.eclipse.org/downloads/packages/release/2020-06/r).
+
+Create a local instance of the Database in MySQL using the [schema](https://github.com/olga-yuz/IMS-Starter/tree/master/src/main/resources) provided.
+
+You can now use the interface to view, create, update and delete Items, Customers and Orders.
 
 ## Running the tests
 
-Automated tests will run when the project is compiling
+Automated tests will run when the project is compiling.
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+These test the DAOs (data access objects), you can run them by running [DAO tests](https://github.com/olga-yuz/IMS-Starter/tree/master/src/test/java/com/qa/ims/persistence/dao) from an IDE. These confirm that each DAO object can sucessfully connect, retrieve and write to the database .
 
-```
-Give an example
-```
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
 
-```
-Give an example
-```
+These test the controllers for the customer, item and order objects, you can run them by running [controller tests](https://github.com/olga-yuz/IMS-Starter/tree/master/src/test/java/com/qa/ims/controller) from an IDE. These confirm that the objects can work together.
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
@@ -86,7 +74,7 @@ java -jar ims-0.0.1-jar-with-dependencies.jar
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+We use [GitHub](https://github.com/) for versioning.
 
 ## Authors
 
@@ -101,6 +89,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Big thanks to Piers Barber, Aswene Sivaraj and Savannah Vaithilingam for all the help!
+
