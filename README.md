@@ -1,4 +1,4 @@
-Coverage: 82.4%
+Coverage: 82.3%
 # IMS Fundamental Project
 
 An Inventory Management application using MySQL
